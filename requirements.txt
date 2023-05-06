@@ -1,4 +1,5 @@
 langchain
 llama-index
 openai
+streamlit
 
