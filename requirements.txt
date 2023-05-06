@@ -2,4 +2,5 @@ langchain
 llama-index
 openai
 streamlit
+fpdf
 
