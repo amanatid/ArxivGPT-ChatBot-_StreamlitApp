@@ -1,4 +1,4 @@
-from llama_index import GPTSimpleVectorIndex, download_loader
+from llama_index import GPTVectorStoreIndex, download_loader
 from langchain.agents import initialize_agent, Tool
 from langchain.llms import OpenAI
 from langchain.chains.conversation.memory import ConversationBufferMemory
@@ -59,13 +59,13 @@ if st.button('load') :
         documents = loader.load_data(search_query=query,    papers_dir= "hey", max_results=max_query, search_criterion=search_query_int)
 
         # create an index of the data for the AI to be able to read
-        index = GPTSimpleVectorIndex.from_documents(documents)
+        index = GPTVectorStoreIndex.from_documents(documents)
         index.save_to_disk('index.json')
         st.markdown("Arxiv papers are loaded based on the criteria")
 
 
 with st.form("my_form"):
-    index = GPTSimpleVectorIndex.load_from_disk('index.json')
+    index = GPTVectorStoreIndex.load_from_disk('index.json')
     user = st.text_input("User:")
     # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
