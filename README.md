@@ -13,7 +13,7 @@ is an extension of the  previous related Arxiv repos and is trained based on thr
     - b)Last updated 
     - c)Submitt Date 
     
-You can find the app on https://amanatid-arxivchatbot-streamlitapp-streamlit-chatbot-yjl8po.streamlit.app/    
+You can find the app on [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://amanatid-arxivchatbot-streamlitapp-streamlit-chatbot-yjl8po.streamlit.app/)    
 
 
 
