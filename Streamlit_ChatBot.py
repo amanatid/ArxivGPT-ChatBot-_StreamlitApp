@@ -21,8 +21,7 @@ st.set_page_config(page_title="My App")
 
 st.header("Arxiv ChatBot ")
 st.subheader(
-    "A Scientific Chatbot  based on  Arxiv Papers. Ask anything based on the"
-    " 1)query 2)no of files and 3)selection criteria "
+    "I am a Chatbot Research Scientist. Please fill the fields below to start our discussion."
 )
 
 
