@@ -38,11 +38,11 @@ if 'OPENAI_API_KEY' not in st.session_state:
 os.environ['OPENAI_API_KEY'] = str(st.session_state.get('OPENAI_API_KEY'))
 
 
-query = st.text_input("Query:")
+query = st.text_input("What scientific topic do you want to discuss?:")
 
-max_query = st.number_input("Number of files(integer number):", step=0)
+max_query = st.number_input("How many papers should i investigate?:", step=0)
 dummy = st.radio(
-    "Search Criterion",
+    "According to which criterion?:",
     ('Relevance', 'LastUpdated', 'SubmittedDate'))
 
 
