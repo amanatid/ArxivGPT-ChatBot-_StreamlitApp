@@ -66,7 +66,7 @@ if query and max_query:
 
 
 with st.form("my_form"):
-    user = st.text_input("Ask me any question about"+query+":")
+    user = st.text_input("Ask me any question about "+query+":")
     # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if user:
