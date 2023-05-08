@@ -38,11 +38,11 @@ if 'OPENAI_API_KEY' not in st.session_state:
 os.environ['OPENAI_API_KEY'] = str(st.session_state.get('OPENAI_API_KEY'))
 
 
-query = st.text_input("What scientific topic do you want to discuss?:")
+query = st.text_input("What scientific topic do you want to discuss?")
 
-max_query = st.number_input("How many papers should i investigate?:", step=0)
+max_query = st.number_input("How many papers should i investigate?", step=0)
 dummy = st.radio(
-    "According to which criterion?:",
+    "According to which criterion?",
     ('Relevance', 'LastUpdated', 'SubmittedDate'))
 
 
@@ -66,7 +66,7 @@ if query and max_query:
 
 
 with st.form("my_form"):
-    user = st.text_input("User:")
+    user = st.text_input("Ask me any question about"+query+":")
     # Every form must have a submit button.
     submitted = st.form_submit_button("Submit")
     if user:
