@@ -3,12 +3,13 @@ from langchain.agents import initialize_agent, Tool
 from langchain.llms import OpenAI
 from langchain.chains.conversation.memory import ConversationBufferMemory
 from langchain.embeddings import OpenAIEmbeddings
+from openai.error import OpenAIError
 from base import ArxivReader_mod_search, ArxivReader_mod
 import os
 import sys
 import openai
 import streamlit as st
-#import numpy as np
+from  sidebar  import *
 
 
 # create the website reader
@@ -19,18 +20,21 @@ global index,dummy
 
 st.set_page_config(page_title="My App")
 
-st.header("Arxiv ChatBot ")
+st.header("ArxivGPT ")
+sidebar()
 st.subheader(
-    "I am a Chatbot Research Scientist. Please fill the fields below to start our discussion."
+    "I am a ArxivGPT(Chatbot) Research Scientist. Please fill the fields below to start our discussion.."
+    "If you find it useful, you can kindly donate here [Stripe](https://buy.stripe.com/cN2dUu44OahXaJO288)"
 )
 
 
-api_key = st.text_input('Open Api Key:')
+#api_key = st.text_input('Open Api Key:')
 
-if 'OPENAI_API_KEY' not in st.session_state:
-   if api_key:
-      st.session_state['OPENAI_API_KEY'] = api_key
-      st.write(st.session_state.get('OPENAI_API_KEY'))
+
+#if 'OPENAI_API_KEY' not in st.session_state:
+#   if api_key:
+#      st.session_state['OPENAI_API_KEY'] = api_key
+#      st.write(st.session_state.get('OPENAI_API_KEY'))
 
 
 
@@ -65,10 +69,23 @@ if query and max_query:
 
 
 with st.form("my_form"):
-    user = st.text_input("Ask me any question about "+query+":")
-    # Every form must have a submit button.
-    submitted = st.form_submit_button("Submit")
-    if user:
-        response = str(index.query(user))
-    if submitted:
-        st.text_area("Bot:", response, height=500)
+    try:
+        user = st.text_input("Ask me any question about "+query+":")
+        # Every form must have a submit button.
+        submitted = st.form_submit_button("Submit")
+        if user:
+            response = str(index.query(user))
+        if submitted:
+            st.text_area("Bot 🤖", response, height=500)
+    except OpenAIError as e:
+        st.error(e._message)
+    except (RuntimeError, TypeError, NameError):
+        st.error('Runtime/Type/Name Error')
+    except OSError as err:
+        st.error("OS error:",err)
+    except ValueError:
+        st.error("Could not convert data to string.")
+    except Exception as err:
+        st.error(f"Unexpected {err=}, {type(err)=}")
+    except ConnectionError as err:
+        st.error("Connection Error:", err)
