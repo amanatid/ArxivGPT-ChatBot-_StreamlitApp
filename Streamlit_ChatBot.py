@@ -60,32 +60,46 @@ if query and max_query:
     if dummy == "SubmittedDate":
         search_query_int = 2
 
-    # load the reader
-    loader = ArxivReader_mod()
-    documents = loader.load_data(search_query=query,    papers_dir= "papers", max_results=max_query, search_criterion=search_query_int)
-    index = GPTSimpleVectorIndex.from_documents(documents)
-    st.markdown("Arxiv papers are loaded based on the criteria")
+    try:
+        # load the reader
+        loader = ArxivReader_mod()
+        documents = loader.load_data(search_query=query,    papers_dir= "papers", max_results=max_query, search_criterion=search_query_int)
+        index = GPTSimpleVectorIndex.from_documents(documents)
+        st.markdown("Arxiv papers are loaded based on the criteria")
+        st.session_state["api_key_configured"] = True
+    except Exception as e:
+        st.error("Please configure your OpenAI API key!")
+
 
 
 
 with st.form("my_form"):
-    try:
+
         user = st.text_input("Ask me any question about "+query+":")
         # Every form must have a submit button.
         submitted = st.form_submit_button("Submit")
         if user:
             response = str(index.query(user))
+
         if submitted:
-            st.text_area("Bot 🤖", response, height=500)
-    except OpenAIError as e:
-        st.error(e._message)
-    except (RuntimeError, TypeError, NameError):
-        st.error('Runtime/Type/Name Error')
-    except OSError as err:
-        st.error("OS error:",err)
-    except ValueError:
-        st.error("Could not convert data to string.")
-    except Exception as err:
-        st.error(f"Unexpected {err=}, {type(err)=}")
-    except ConnectionError as err:
-        st.error("Connection Error:", err)
+          try:
+            if  not st.session_state.get("api_key_configured"):
+                st.error("Please configure your OpenAI API key!")
+            if not query:
+                st.error("Please enter a topic to discuss!")
+            if not max_query:
+                st.error("Please choose number of files to be loaded!")
+            if(st.session_state.get("api_key_configured") and query and max_query):
+                st.text_area("Bot 🤖", response, height=500)
+          except OpenAIError as e:
+                 st.error(e._message)
+          except (RuntimeError, TypeError, NameError):
+                 st.error("Runtime/Type/Name Error")
+          except OSError as err:
+                 st.error("OS error:",err)
+          except ValueError:
+                 st.error("Could not convert data to string.")
+          except Exception as err:
+                 st.error(f"Unexpected {err=}, {type(err)=}")
+          except ConnectionError as err:
+                 st.error("Connection Error:", err)
