@@ -13,7 +13,7 @@ from  sidebar  import *
 
 
 # create the website reader
-ArxivReader = download_loader("ArxivReader")
+ArxivReader_mod = download_loader("ArxivReader")
 global index,dummy
 
 
