@@ -1,4 +1,4 @@
-# ArxivChatBot_StreamlitApp
+# ArxivChatBot_StreamlitApp GPTSimpleVectorIndex
 A Chatbot based on openAI and streamlit for Arxiv 
 
 ## **Intro**
@@ -12,8 +12,9 @@ is an extension of the  previous related Arxiv repos and is trained based on thr
     - a)Relevance 
     - b)Last updated 
     - c)Submitt Date 
-    
-You can find the app on [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://amanatid-arxivchatbot-streamlitapp-streamlit-chatbot-yjl8po.streamlit.app/). In case you find it useful you can donate on [Stripe](https://buy.stripe.com/cN2dUu44OahXaJO288). 
+
+Note this version works locally **only on your computer** and not on the platform of Streamlit.
+You can find a working  [updated version](https://github.com/amanatid/ArxivChaBot_StreamLit_Updated/tree/main) of the  the app on  platfom [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://amanatid-arxivchabot-streamlit-streamlit-chatbot-sidebar-2r4zv4.streamlit.app/). In case you find it useful you can donate on [Stripe (https://buy.stripe.com/cN2dUu44OahXaJO288). 
 
 
 
